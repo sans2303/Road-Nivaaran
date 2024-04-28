@@ -1,0 +1,78 @@
+/* Basic reset and global settings */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    /* Light blue background */
+    color: #333;
+    /* Darker text for better readability */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center-align all content vertically */
+}
+
+/* Styling the header */
+h1 {
+    color: #003366;
+    /* Dark blue theme */
+}
+
+img{
+    height: 200px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+/* Styling the form */
+form {
+    background-color: #e6f2ff;
+    /* Very light blue background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+}
+
+/* Form elements styling */
+input[type="file"] {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #007acc;
+    /* Button with a shade of blue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #005c99;
+    /* Darker blue on hover */
+}
+
+/* Styling for prediction results */
+h2 {
+    margin-top: 30px;
+}
+
+p {
+    background-color: #cce5ff;
+    /* Light blue background for text */
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensures padding does not add to the width */
+}
+
+/* Error and status messages */
+#error {
+    color: #cc0000;
+    /* Red color for errors */
+}
