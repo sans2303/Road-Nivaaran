@@ -13,7 +13,7 @@ app = Flask(__name__)
 #run_with_ngrok(app)
 def predict_defect(image_path):
     # Load the YOLOv5 model
-    model = YOLO(r'weights\best.pt')
+    model = YOLO(r'/weights/best.pt')
 
     # Read and resize the input image using Pillow (PIL)
     with Image.open(image_path) as img:
