@@ -19,11 +19,13 @@ h1 {
     /* Dark blue theme */
 }
 
-img{
-    height: 200px;
-    padding: 0px;
-    margin-bottom: 0px;
+img {
+    max-width: 100%;
+    height: auto;
+    padding: 0;
+    margin-bottom: 0;
 }
+
 /* Styling the form */
 form {
     background-color: #e6f2ff;
@@ -32,15 +34,21 @@ form {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 5px;
+    max-width: 400px;
+    /* Limiting the width of the form */
+    width: 100%;
 }
 
 /* Form elements styling */
 input[type="file"] {
     margin-top: 10px;
     margin-bottom: 20px;
+    width: 100%;
+    /* Make file input full width */
 }
 
-button {
+button,
+a {
     background-color: #007acc;
     /* Button with a shade of blue */
     color: white;
@@ -49,6 +57,8 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    /* Make button and anchor full width */
 }
 
 button:hover {
@@ -71,8 +81,17 @@ p {
     /* Ensures padding does not add to the width */
 }
 
-/* Error and status messages */
-#error {
-    color: #cc0000;
-    /* Red color for errors */
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+
+    /* Adjust styles for smaller screens here */
+    body {
+        padding: 10px;
+        /* Reduce padding on smaller screens */
+    }
+
+    form {
+        max-width: none;
+        /* Remove max-width for full width on smaller screens */
+    }
 }
