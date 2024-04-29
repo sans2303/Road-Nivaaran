@@ -1,16 +1,17 @@
-# app_with_yolo.py
-from flask import Flask, render_template, request, send_file, Response
+from flask import Flask, render_template, request
 from ultralytics import YOLO
 from PIL import Image
 import requests
 from fpdf import FPDF
 import base64
-import io
 
 app = Flask(__name__)
+
 def predict_defect(image_path):
     # Load the YOLOv5 model
-    model = YOLO('./weights/best.pt')
+    model = YOLO(r'weights\best.pt')
+    
+    
 
     # Read and resize the input image using Pillow (PIL)
     with Image.open(image_path) as img:
@@ -30,12 +31,15 @@ def predict_defect(image_path):
     return prediction
 
 
+
 @app.route('/')
 def home():
     return render_template('index.html', prediction=None)
 
 
-def generate_pdf(image_path, location,complain, subject):
+
+
+def generate_pdf(image_path, location,complain):
  
   # Create a new FPDF object
   pdf = FPDF()
@@ -47,9 +51,9 @@ def generate_pdf(image_path, location,complain, subject):
   pdf.set_font("Arial", size=12)
 
   # Create the subject line (centered)
-  if complain == "garbage":
-      subject = "Subject: Complaint Regarding Roadside Garbage"
-      body_text = f"""Dear [Recipient Name],
+  if complain=="garbage":
+    subject = "Subject: Complaint Regarding Roadside Garbage"
+    body_text = f"""Dear [Recipient Name],
 
   I am writing to express my concern about the excessive amount of garbage accumulating on the roadside near {location}. This has become a serious issue, not only detracting from the aesthetics of the neighborhood but also posing potential health hazards.
 
@@ -62,9 +66,10 @@ def generate_pdf(image_path, location,complain, subject):
   Sincerely,
 
   [Your Name]"""
-  elif complain == "pothole":
-      subject = "Subject: Complaining about Potholes on Road"  
-      body_text = """Dear [Recipient Name],
+    
+  elif complain=="pothole":
+    subject = "Subject: Complaining about Potholes on Road"
+    body_text = """Dear [Recipient Name],
 
 I am writing to express my concern about the numerous potholes that have developed on the road near [Location description]. These potholes pose a significant danger to motorists, cyclists, and pedestrians.
 
@@ -100,11 +105,9 @@ Sincerely,
 
  # Output the PDF as a byte stream
   pdf_output = pdf.output(dest='S')
-  pdf_bytes = io.BytesIO(pdf_output.encode('latin-1')).read()
-   
 
-  return pdf_bytes
-
+  return pdf_output.encode('latin1')
+    
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -114,21 +117,20 @@ def predict():
     # Save the file temporarily (optional)
     image_path = 'temp_image.jpg'
     file.save(image_path)
-    # Pass the image to the YOLOv5 model for prediction
+    # Pass the image to the YOLOv8 model for prediction
     prediction = predict_defect(image_path)
-    
-    
+
     #Generating Pdf according to prediction 
-    
-    pdf_content = base64.b64encode(generate_pdf(image_path, " Adharvadi Jail Road", prediction))
+    pdf_content = base64.b64encode( generate_pdf(image_path," Adharvadi Jail Road", prediction)).decode('utf-8')
+
 
     # Render the template with the prediction result
     return render_template('index.html', prediction=prediction,pdf_content=pdf_content)
 
+
     latitude = request.form.get('latitude')
     longitude = request.form.get('longitude')
     
-
 
 if __name__ == '__main__':
     app.run(debug=True)
