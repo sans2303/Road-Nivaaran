@@ -35,7 +35,7 @@ def home():
     return render_template('index.html', prediction=None)
 
 
-def generate_pdf(image_path, location,complain):
+def generate_pdf(image_path, location,complain, subject):
  
   # Create a new FPDF object
   pdf = FPDF()
@@ -47,8 +47,8 @@ def generate_pdf(image_path, location,complain):
   pdf.set_font("Arial", size=12)
 
   # Create the subject line (centered)
-  if complain=="garbage":
-    subject = "Subject: Complaint Regarding Roadside Garbage"
+  if complain == "garbage":
+      subject = "Subject: Complaint Regarding Roadside Garbage"
     body_text = f"""Dear [Recipient Name],
 
   I am writing to express my concern about the excessive amount of garbage accumulating on the roadside near {location}. This has become a serious issue, not only detracting from the aesthetics of the neighborhood but also posing potential health hazards.
@@ -62,9 +62,9 @@ def generate_pdf(image_path, location,complain):
   Sincerely,
 
   [Your Name]"""
-    
-  elif complain=="pothole":
-    subject = "Subject: Complaining about Potholes on Road"
+  elif complain == "pothole":
+      subject = "Subject: Complaining about Potholes on Road"  
+
     body_text = """Dear [Recipient Name],
 
 I am writing to express my concern about the numerous potholes that have developed on the road near [Location description]. These potholes pose a significant danger to motorists, cyclists, and pedestrians.
