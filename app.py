@@ -10,7 +10,7 @@ import io
 app = Flask(__name__)
 def predict_defect(image_path):
     # Load the YOLOv5 model
-    model = YOLO(r'/weights/best.pt')
+    model = YOLO('./weights/best.pt')
 
     # Read and resize the input image using Pillow (PIL)
     with Image.open(image_path) as img:
