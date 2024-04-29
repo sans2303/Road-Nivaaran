@@ -3,14 +3,11 @@ from flask import Flask, render_template, request, send_file, Response
 from ultralytics import YOLO
 from PIL import Image
 import requests
-import webbrowser
-from flask_ngrok import run_with_ngrok
 from fpdf import FPDF
 import base64
 import io
 
 app = Flask(__name__)
-#run_with_ngrok(app)
 def predict_defect(image_path):
     # Load the YOLOv5 model
     model = YOLO(r'/weights/best.pt')
